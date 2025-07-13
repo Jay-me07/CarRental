@@ -6,8 +6,6 @@ import toast from 'react-hot-toast'
 
 const Dashboard = () => {
 
-  const {axios, isOwner, currency} = useAppContext()
-
 
   const [data,setData] = useState({
     totalCars: 0,
@@ -17,6 +15,8 @@ const Dashboard = () => {
     recentBookings: [],
     monthlyRevenue: 0
   })
+
+  const {axios, isOwner, currency} = useAppContext()
 
   const dashBoardCards = [
     {title: "Total Cars", value: data.totalCars, icon: assets.carIconColored},
@@ -29,8 +29,8 @@ const Dashboard = () => {
     try {
       const {data} = await axios.get('/api/owner/dashboard')
 
-      if (data.success && data.dashboardData) {
-        setData(data.dashboardData)
+      if (data.success) {
+        setData(data.dashBoardData)
       } else{
         toast.error(data.message)
       }
